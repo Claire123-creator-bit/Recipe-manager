@@ -1,0 +1,17 @@
+def add_recipe(title, instructions, category, ingredients):
+	# Example implementation, adjust as needed
+	return {
+		'title': title,
+		'instructions': instructions,
+		'category': category,
+		'ingredients': ingredients
+	}
+
+# Define the variables before calling add_recipe
+title = "Sample Recipe"
+instructions = "Mix all ingredients and cook for 20 minutes."
+category = "Dinner"
+ingredients = ["ingredient1", "ingredient2", "ingredient3"]
+
+recipe_info = add_recipe(title, instructions, category, ingredients)
+print(f"✅ Recipe '{recipe_info['title']}' added successfully!")

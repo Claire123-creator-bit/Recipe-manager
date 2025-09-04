@@ -1,0 +1,15 @@
+def handle_list():
+    from app.db import get_session
+    from app.services import list_recipes
+
+    category = input("Enter category to filter (or leave blank): ").strip()
+    with get_session() as session:
+        recipes = list_recipes(session, category if category else None)
+        # Access all needed attributes while session is open
+        recipe_data = [
+            (r.title, r.category.name if r.category else 'Uncategorized')
+            for r in recipes
+        ]
+    print("\n📖 Recipes:")
+    for title, cat_name in recipe_data:
+        print(f"- {title} ({cat_name})")

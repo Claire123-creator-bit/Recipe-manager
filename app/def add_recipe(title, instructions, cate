@@ -1,0 +1,22 @@
+# app/services.py
+from app.db import SessionLocal
+from app.models import Recipe, Ingredient
+
+def add_recipe(title, instructions, category, ingredients):
+    session = SessionLocal()
+    try:
+        recipe = Recipe(title=title, instructions=instructions, category=category)
+        session.add(recipe)
+        session.commit()
+        session.refresh(recipe)
+
+        for ing in ingredients:
+            ingredient = Ingredient(name=ing.strip(), recipe_id=recipe.id)
+            session.add(ingredient)
+
+        session.commit()
+
+        saved_title = recipe.title
+        return saved_title
+    finally:
+        session.close()

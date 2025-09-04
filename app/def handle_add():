@@ -1,0 +1,11 @@
+def add_recipe(title, instructions, category, ingredients):
+    return title
+
+def handle_add():
+    title = input("Enter recipe title: ")
+    instructions = input("Enter instructions: ")
+    category = input("Enter category: ")
+    ingredients = input("Enter ingredients (comma-separated): ").split(",")
+
+    saved_title = add_recipe(title, instructions, category, ingredients)
+    print(f"✅ Recipe '{saved_title}' added successfully!")

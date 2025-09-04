@@ -1,0 +1,11 @@
+class Recipe(Base):
+    __tablename__ = "recipes"
+    # ...
+
+class Ingredient(Base):
+    __tablename__ = "ingredients"
+    # ...
+
+class Category(Base):
+    __tablename__ = "categories"
+    # ...

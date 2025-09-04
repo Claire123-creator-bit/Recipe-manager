@@ -1,0 +1,28 @@
+from .models import Ingredient, Category, Recipe 
+
+def add_recipe(session, title, instructions, category_name, ingredient_names):
+    # Ensure ingredient_names is a list
+    if isinstance(ingredient_names, str):
+        ingredient_names = [name.strip() for name in ingredient_names.split(",") if name.strip()]
+    else:
+        ingredient_names = [name.strip() for name in ingredient_names if name.strip()]
+
+    # Get or create category
+    category = session.query(Category).filter_by(name=category_name).first()
+    if not category:
+        category = Category(name=category_name)
+        session.add(category)
+        session.flush()
+
+    # Create recipe and add to session first
+    recipe = Recipe(title=title, instructions=instructions, category=category)
+    session.add(recipe)
+    session.flush()
+
+    # Add ingredients
+    for name in ingredient_names:
+        ingredient = Ingredient(name=name, recipe=recipe)
+        session.add(ingredient)
+
+    session.commit()
+    return recipe

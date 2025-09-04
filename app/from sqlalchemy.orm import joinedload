@@ -1,0 +1,10 @@
+from sqlalchemy.orm import joinedload
+
+def list_recipes(session, category=None):
+    query = session.query(Recipe).options(
+        joinedload(Recipe.category),
+        joinedload(Recipe.ingredients)
+    )
+    if category:
+        query = query.join(Category).filter(Category.name == category)
+    return query.all()
